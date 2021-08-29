@@ -1,3 +1,16 @@
-h1, p {
+h1,
+p {
   font-family: Lato;
+}
+.btn {
+  width: auto;
+  display: flex;
+  margin-left: 35%;
+}
+.form {
+  border: 1px solid #121212;
+  margin-left: 25%;
+  margin-right: 25%;
+  margin-top: 5%;
+  margin-bottom: 5%;
 }

@@ -4,7 +4,11 @@ import './style.css';
 import { useForm } from 'react-hook-form';
 export default function App() {
   const refer = useRef();
-  const { register, handleSubmit } = useForm();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors }
+  } = useForm();
   let weekDay = [
     { day: 'Monday', Check: false },
     { day: 'Tuesday', Check: false },
@@ -41,13 +45,18 @@ export default function App() {
     data.payDateFrom = updateDateFrom;
     setDate = data.payDateFrom;
     console.log(data);
+    const update = () => {
+      return <h4>Submitted</h4>;
+    };
+    update();
     return data;
   };
   return (
-    <div>
+    <div class="form">
+      {/* style={{ maxWidth: 680, marginLeft: 350}} */}
       <h1 className="text-light bg-dark p-4 ">Pay Schedule</h1>
       <form
-        className="form-group m-5 p-3 px-6"
+        className="form-group m-5 p-2 px-6"
         onSubmit={handleSubmit(onSubmit)}
       >
         <h2>It's Time to set up your Pay Schedule</h2>
@@ -55,8 +64,9 @@ export default function App() {
           tell us when and how when you pay your employees. We'll make they will
           be paid on time
         </small>
+        <br />
         <label className="mt-4 mb-2" htmlFor="workWeek">
-          Select Work Week{' '}
+          Select Work Week <span class="text-danger ">*</span>
         </label>
         <br />
         {weekDay.map((day, i) => {
@@ -83,30 +93,43 @@ export default function App() {
         })}
         <br />
         <br />
-        <label htmlFor="hoursWork">Working Hours </label>
+        <label htmlFor="hoursWork">
+          Working Hours <span class="text-danger ">*</span>{' '}
+        </label>
         <input
           className="form-control"
-          {...register('hoursWork')}
+          {...register('hoursWork', { required: true })}
           type="hours"
           placeholder="Enter Week Hours"
           name="hoursWork"
         />
+        {errors.hoursWork && (
+          <p class="text-danger">*Working Hours is required.</p>
+        )}
         <br />
-        <label htmlFor="payDate">Pay Date </label>
+        <label htmlFor="payDate">
+          Pay Date <span class="text-danger ">*</span>{' '}
+        </label>
         <input
           className="form-control"
-          {...register('payDate')}
+          {...register('payDate', { required: true })}
           type="date"
           name="payDate"
         />
+        {errors.payDate && <p class="text-danger">*Pay Date is required.</p>}
         <br />
-        <label htmlFor="payDateFrom">Pay Date From </label>
+        <label htmlFor="payDateFrom">
+          Pay Date From <span class="text-danger ">*</span>
+        </label>
         <input
           className="form-control"
-          {...register('payDateFrom')}
+          {...register('payDateFrom', { required: true })}
           type="date"
           name="payDateFrom"
         />
+        {errors.payDateFrom && (
+          <p class="text-danger">*Pay Date From is required.</p>
+        )}
         <br />
         {/* <span class="bg-secondary text-light p-1 rounded ">
           Salary for the month of {setDate}
