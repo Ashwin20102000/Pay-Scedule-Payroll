@@ -14,7 +14,7 @@ export default function App() {
     { day: 'Saturday', Check: false },
     { day: 'Sunday', Check: false }
   ];
-  let setDate=''
+  let setDate = '';
   const onSubmit = data => {
     let weekDays = [];
     const updatedDay = weekDay.filter(day => {
@@ -39,34 +39,45 @@ export default function App() {
       .reverse()
       .join('-');
     data.payDateFrom = updateDateFrom;
-    setDate=data.payDateFrom
-    // console.log(data);
-    return data
+    setDate = data.payDateFrom;
+    console.log(data);
+    return data;
   };
   return (
     <div>
       <h1 className="text-light bg-dark p-4 ">Pay Schedule</h1>
-      <form className="form-group m-5 p-3 px-6" onSubmit={handleSubmit(onSubmit)}>
+      <form
+        className="form-group m-5 p-3 px-6"
+        onSubmit={handleSubmit(onSubmit)}
+      >
         <h2>It's Time to set up your Pay Schedule</h2>
         <small class="form-text text-muted">
           tell us when and how when you pay your employees. We'll make they will
           be paid on time
         </small>
-        <label className="mt-4 mb-2" htmlFor="workWeek">Select Work Week </label>
+        <label className="mt-4 mb-2" htmlFor="workWeek">
+          Select Work Week{' '}
+        </label>
         <br />
         {weekDay.map((day, i) => {
           return (
             <>
               <br />
-              <input class="form-check-input" key={day.day}
-                  type="checkbox"
-                  htmlFor="day"
-                  onChange={() => {
-                    weekDay[i].Check = !weekDay[i].Check;
-                  }}
-                  name={{ day }}
-                  value={{ day }} />
-                  <label class="form-check-label" for="day" > &nbsp; {day.day}</label>
+              <input
+                class="form-check-input"
+                key={day.day}
+                type="checkbox"
+                htmlFor="day"
+                onChange={() => {
+                  weekDay[i].Check = !weekDay[i].Check;
+                }}
+                name={{ day }}
+                value={{ day }}
+              />
+              <label class="form-check-label" for="day">
+                {' '}
+                &nbsp; {day.day}
+              </label>
             </>
           );
         })}
@@ -103,10 +114,11 @@ export default function App() {
         {/* <br />
         <br /> */}
         <button
-          className="btn btn-primary"
+          className="form-control btn btn-primary"
           type="submit"
           value="Save & Continue →"
-        >Save & Continue →
+        >
+          Save & Continue →
         </button>
       </form>
     </div>
